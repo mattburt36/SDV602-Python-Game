@@ -35,15 +35,20 @@ def game_play(direction):
     """
     global game_state
     
-    if direction.lower() in 'northsouth': # is this a nasty check?
-        game_place = game_places[game_state]
-        proposed_state = game_place[direction]
-        if proposed_state == '' :
-            return 'You can not go that way.\n'+game_places[game_state]['Story']
-        else :
-            game_state = proposed_state
-            return game_places[game_state]['Story']
-        
+
+    game_place = game_places[game_state]
+    proposed_state = game_place[direction]
+    if Option1==True:
+        game_places[game_state]['Description']
+        return game_places[game_state]['Description']
+    elif Option2==True:
+        game_state = proposed_state
+        return game_places[game_state]['Description']
+    elif Option3==True:
+        return game_places[game_state]['Description']
+    else:
+        return 'Please select an option'+game_places[game_state]['Description']
+    
         
 def make_a_window():
     """
@@ -56,10 +61,10 @@ def make_a_window():
     prompt_input = [sg.Text('Enter your command',font='Any 14'),sg.Input(key='-IN-',size=(20,1),font='Any 14')]
     buttons = [sg.Button('Enter',  bind_return_key=True), sg.Button('Exit')]
     command_col = sg.Column([prompt_input,buttons],element_justification='r')
-    layout = [[sg.Text('Story:', size=(7,1), font='Any 14'), sg.Text(show_current_place(),size=(100,4), font='Any 14', key='-OUTPUT-')],
+    layout = [[sg.Text('DEscription:', size=(7,1), font='Any 14'), sg.Text(show_current_place(),size=(100,4), font='Any 14', key='-OUTPUT-')],
              [command_col]]
 
-    return  sg.Window('Adventure Game', layout, size=(320,200))
+    return  sg.Window('Prison Game', layout, size=(max))
     
 
 if __name__ == "__main__":
